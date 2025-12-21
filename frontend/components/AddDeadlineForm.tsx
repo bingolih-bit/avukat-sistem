@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { useDeadlineStore } from '@/store/deadlineStore'
-import { otomatikSureHesapla } from '@/lib/dateUtils'
-import { format } from 'date-fns'
 
 interface AddDeadlineFormProps {
   onClose: () => void
@@ -21,18 +19,6 @@ export default function AddDeadlineForm({ onClose }: AddDeadlineFormProps) {
     mahkeme: '',
     notlar: '',
   })
-
-  // Tebligat tarihi değiştiğinde otomatik süre hesapla
-  useEffect(() => {
-    if (formData.tebligatTarihi && (formData.tur === 'istinaf' || formData.tur === 'temyiz' || formData.tur === 'cevap_layihasi')) {
-      const tebligatDate = new Date(formData.tebligatTarihi)
-      const calculatedDate = otomatikSureHesapla(formData.tur, tebligatDate)
-      setFormData(prev => ({
-        ...prev,
-        sonGun: format(calculatedDate, "yyyy-MM-dd'T'HH:mm")
-      }))
-    }
-  }, [formData.tebligatTarihi, formData.tur])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -112,19 +98,6 @@ export default function AddDeadlineForm({ onClose }: AddDeadlineFormProps) {
                 placeholder="Ankara 5. Asliye Ceza"
               />
             </div>
-          </div>
-
-          <div>
-            <label className="block text-sm font-semibold mb-2">Tebligat Tarihi</label>
-            <input
-              type="date"
-              value={formData.tebligatTarihi}
-              onChange={(e) => setFormData({ ...formData, tebligatTarihi: e.target.value })}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-            <p className="text-xs text-gray-500 mt-1">
-              İstinaf/Temyiz için otomatik süre hesaplanır
-            </p>
           </div>
 
           <div>
