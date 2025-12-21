@@ -8,6 +8,7 @@ import DeadlineItem from '@/components/DeadlineItem'
 import TaskItem from '@/components/TaskItem'
 import AddDeadlineForm from '@/components/AddDeadlineForm'
 import AddTaskForm from '@/components/AddTaskForm'
+import NotificationManager from '@/components/NotificationManager'
 
 export default function Home() {
   const { deadlines, fetchDeadlines, deleteDeadline } = useDeadlineStore()
@@ -48,6 +49,9 @@ export default function Home() {
         <StatCard number={bugunkuGorevler} label="AKTİF GÖREVLER" type="tasks" icon="✅" />
         <StatCard number={toplamAktif} label="TOPLAM AKTİF" type="safe" icon="📊" />
       </div>
+
+      {/* Bildirim Yönetimi */}
+      <NotificationManager />
 
       {/* Tabs */}
       <div className="flex gap-3 mb-6">

@@ -1,0 +1,53 @@
+{
+  "name": "Avukat Asistan",
+  "short_name": "Avukat",
+  "description": "Süre takip, duruşma yönetimi ve avukatlık işleri asistanı",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1e40af",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "business"],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Yeni Süre Ekle",
+      "short_name": "Süre Ekle",
+      "description": "Hızlı süre ekleme",
+      "url": "/?action=add-deadline",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Bugünün Ajandası",
+      "short_name": "Ajanda",
+      "description": "Bugünkü duruşma ve görevler",
+      "url": "/?action=today",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "prefer_related_applications": false
+}

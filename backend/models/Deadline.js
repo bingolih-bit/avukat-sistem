@@ -21,6 +21,24 @@ const deadlineSchema = new mongoose.Schema({
   dosyaNo: String,
   mahkeme: String,
   notlar: String,
+
+  // İlişkili Dosya (Case) referansı
+  dosyaId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Case'
+  },
+
+  // İlişkili Müvekkil referansı
+  muvekkilId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Client'
+  },
+
+  // Duruşma saati (durusma türü için)
+  saat: {
+    type: String,
+    trim: true
+  },
   aciliyet: {
     type: String,
     enum: ['acil', 'yakin', 'guvenli'],
