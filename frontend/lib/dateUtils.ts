@@ -1,6 +1,25 @@
 import { addDays, addWeeks, addMonths, isWeekend, differenceInDays, parseISO } from 'date-fns'
-import { format } from 'date-fns'
 import { tr } from 'date-fns/locale'
+
+// Native tarih formatlama (date-fns format yerine)
+function formatDateNative(date: Date, formatStr: string): string {
+  if (formatStr === 'yyyy-MM-dd') {
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const day = String(date.getDate()).padStart(2, '0')
+    return `${year}-${month}-${day}`
+  }
+  // Türkçe tarih formatı için
+  if (formatStr === 'dd MMMM yyyy') {
+    const aylar = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
+                   'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık']
+    const gun = String(date.getDate()).padStart(2, '0')
+    const ay = aylar[date.getMonth()]
+    const yil = date.getFullYear()
+    return `${gun} ${ay} ${yil}`
+  }
+  return date.toISOString()
+}
 
 // Türkiye resmi tatilleri 2024-2025
 const RESMI_TATILLER_2024_2025 = [
@@ -23,7 +42,7 @@ const RESMI_TATILLER_2024_2025 = [
 ]
 
 export function isResmiTatil(date: Date): boolean {
-  const dateStr = format(date, 'yyyy-MM-dd')
+  const dateStr = formatDateNative(date, 'yyyy-MM-dd')
   return RESMI_TATILLER_2024_2025.includes(dateStr)
 }
 
@@ -83,7 +102,7 @@ export function hesaplaAciliyet(kalanGun: number): 'acil' | 'yakin' | 'guvenli' 
 // Tarih formatla (Türkçe)
 export function formatTarih(date: string | Date, formatStr: string = 'dd MMMM yyyy'): string {
   const targetDate = typeof date === 'string' ? parseISO(date) : date
-  return format(targetDate, formatStr, { locale: tr })
+  return formatDateNative(targetDate, formatStr)
 }
 
 // Süre türüne göre otomatik hesaplama
