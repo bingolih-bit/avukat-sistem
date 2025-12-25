@@ -17,11 +17,12 @@ export const metadata = {
     telephone: false,
   },
   themeColor: '#1e40af',
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
-  },
+}
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
 }
 
 export default function RootLayout({
