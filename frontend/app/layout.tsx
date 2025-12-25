@@ -7,6 +7,10 @@ const PWAInstaller = dynamic(() => import('@/components/PWAInstaller'), { ssr: f
 
 const inter = Inter({ subsets: ['latin'] })
 
+// Force dynamic rendering - static generation'ı kapat
+export const dynamic = 'force-dynamic'
+export const dynamicParams = true
+
 export const metadata = {
   title: 'Avukat Asistan',
   description: 'Süre takip, duruşma yönetimi ve avukatlık işleri asistanı',
