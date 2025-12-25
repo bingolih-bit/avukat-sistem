@@ -1,9 +1,9 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
-import dynamic from 'next/dynamic'
+import NextDynamic from 'next/dynamic'
 
 // SSR devre dışı - sadece client-side render
-const PWAInstaller = dynamic(() => import('@/components/PWAInstaller'), { ssr: false })
+const PWAInstaller = NextDynamic(() => import('@/components/PWAInstaller'), { ssr: false })
 
 const inter = Inter({ subsets: ['latin'] })
 
