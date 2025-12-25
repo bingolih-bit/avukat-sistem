@@ -1,6 +1,9 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
-import PWAInstaller from '@/components/PWAInstaller'
+import dynamic from 'next/dynamic'
+
+// SSR devre dışı - sadece client-side render
+const PWAInstaller = dynamic(() => import('@/components/PWAInstaller'), { ssr: false })
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,7 +19,6 @@ export const metadata = {
   formatDetection: {
     telephone: false,
   },
-  themeColor: '#1e40af',
 }
 
 export const viewport = {
