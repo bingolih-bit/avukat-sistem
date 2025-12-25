@@ -1,7 +1,12 @@
-import { addDays, addWeeks, addMonths, isWeekend, differenceInDays, parseISO } from 'date-fns'
+import { addDays, addWeeks, addMonths, differenceInDays, parseISO } from 'date-fns'
 import { tr } from 'date-fns/locale'
 
-// Native tarih formatlama (date-fns format yerine)
+// Native fonksiyonlar (date-fns yerine)
+function isWeekend(date: Date): boolean {
+  const day = date.getDay()
+  return day === 0 || day === 6 // 0 = Pazar, 6 = Cumartesi
+}
+
 function formatDateNative(date: Date, formatStr: string): string {
   if (formatStr === 'yyyy-MM-dd') {
     const year = date.getFullYear()
