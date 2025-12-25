@@ -1,0 +1,103 @@
+// Prisma Schema - PostgreSQL Database
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Kullanıcılar
+model User {
+  id            String       @id @default(cuid())
+  email         String       @unique
+  passwordHash  String       @map("password_hash")
+  name          String?
+  createdAt     DateTime     @default(now()) @map("created_at")
+  updatedAt     DateTime     @updatedAt @map("updated_at")
+
+  expenses      Expense[]
+  income        Income[]
+  fixedCosts    FixedCost[]
+
+  @@map("users")
+}
+
+// Harcamalar
+model Expense {
+  id          String   @id @default(cuid())
+  userId      String   @map("user_id")
+  amount      Decimal  @db.Decimal(12, 2)
+  category    String
+  description String?
+  receiptUrl  String?  @map("receipt_url")
+  date        DateTime
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([date])
+  @@index([category])
+  @@map("expenses")
+}
+
+// Gelirler
+model Income {
+  id          String   @id @default(cuid())
+  userId      String   @map("user_id")
+  amount      Decimal  @db.Decimal(12, 2)
+  source      String
+  description String?
+  date        DateTime
+  isRecurring Boolean  @default(false) @map("is_recurring")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([date])
+  @@index([source])
+  @@map("income")
+}
+
+// Sabit Giderler
+model FixedCost {
+  id          String   @id @default(cuid())
+  userId      String   @map("user_id")
+  name        String
+  amountMin   Decimal  @db.Decimal(12, 2) @map("amount_min")
+  amountMax   Decimal? @db.Decimal(12, 2) @map("amount_max")
+  category    String
+  dueDay      Int      @map("due_day") // 1-31 arası (ayın kaçıncı günü)
+  isActive    Boolean  @default(true) @map("is_active")
+  lastPaidAt  DateTime? @map("last_paid_at")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([dueDay])
+  @@index([isActive])
+  @@map("fixed_costs")
+}
+
+// Kategoriler (Preset + Özel)
+model Category {
+  id        String   @id @default(cuid())
+  name      String
+  type      String   // 'expense' veya 'income'
+  icon      String?
+  color     String?
+  isDefault Boolean  @default(false) @map("is_default")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@unique([name, type])
+  @@index([type])
+  @@map("categories")
+}
