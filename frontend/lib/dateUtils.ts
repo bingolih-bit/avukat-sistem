@@ -1,7 +1,31 @@
-import { addDays, addWeeks, addMonths, differenceInDays, parseISO } from 'date-fns'
-import { tr } from 'date-fns/locale'
+// TÜM date-fns fonksiyonları native olarak yazıldı (TypeScript import sorununu çözmek için)
 
-// Native fonksiyonlar (date-fns yerine)
+// Native fonksiyonlar
+function addDays(date: Date, days: number): Date {
+  const result = new Date(date)
+  result.setDate(result.getDate() + days)
+  return result
+}
+
+function addWeeks(date: Date, weeks: number): Date {
+  return addDays(date, weeks * 7)
+}
+
+function addMonths(date: Date, months: number): Date {
+  const result = new Date(date)
+  result.setMonth(result.getMonth() + months)
+  return result
+}
+
+function differenceInDays(dateLeft: Date, dateRight: Date): number {
+  const diffTime = dateLeft.getTime() - dateRight.getTime()
+  return Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+}
+
+function parseISO(dateString: string): Date {
+  return new Date(dateString)
+}
+
 function isWeekend(date: Date): boolean {
   const day = date.getDay()
   return day === 0 || day === 6 // 0 = Pazar, 6 = Cumartesi
