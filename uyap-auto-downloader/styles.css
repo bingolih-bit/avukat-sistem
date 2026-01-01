@@ -1,0 +1,344 @@
+/* UYAP Otomatik Dosya İndirici - Styles */
+
+#uyap-auto-downloader-panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  max-width: 90vw;
+  max-height: 80vh;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  z-index: 999999;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Header */
+.uyap-panel-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.uyap-panel-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+#uyap-close-panel {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+#uyap-close-panel:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Body */
+.uyap-panel-body {
+  padding: 20px;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Stats */
+.uyap-stats {
+  padding: 12px;
+  background: #f3f4f6;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* Actions */
+.uyap-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.uyap-btn {
+  flex: 1;
+  min-width: 140px;
+  padding: 10px 16px;
+  border: 1px solid #d1d5db;
+  background: white;
+  color: #374151;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.uyap-btn:hover {
+  background: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.uyap-btn-primary {
+  background: #667eea;
+  color: white;
+  border-color: #667eea;
+}
+
+.uyap-btn-primary:hover {
+  background: #5568d3;
+}
+
+.uyap-btn-success {
+  background: #10b981;
+  color: white;
+  border-color: #10b981;
+}
+
+.uyap-btn-success:hover {
+  background: #059669;
+}
+
+/* File List */
+.uyap-file-list {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 10px;
+  background: #fafafa;
+}
+
+.uyap-file-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 8px;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+  transition: all 0.2s;
+}
+
+.uyap-file-item:hover {
+  border-color: #667eea;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+}
+
+.uyap-file-item input[type="checkbox"] {
+  margin-right: 10px;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.uyap-file-item label {
+  flex: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.uyap-file-type {
+  display: inline-block;
+  padding: 4px 10px;
+  background: #667eea;
+  color: white;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  min-width: 50px;
+  text-align: center;
+}
+
+.uyap-file-name {
+  flex: 1;
+  font-size: 14px;
+  color: #374151;
+}
+
+.uyap-no-files {
+  text-align: center;
+  padding: 30px;
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+/* Download Section */
+.uyap-download-section {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  padding: 15px;
+  background: #f9fafb;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.uyap-download-section label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.uyap-download-section input[type="number"] {
+  width: 80px;
+  padding: 6px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+#uyap-start-download {
+  flex-shrink: 0;
+}
+
+/* Progress */
+.uyap-progress {
+  padding: 15px;
+  background: #f3f4f6;
+  border-radius: 8px;
+}
+
+.uyap-progress-bar {
+  width: 100%;
+  height: 24px;
+  background: #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.uyap-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  transition: width 0.3s ease;
+  width: 0%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+#uyap-progress-text {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* Log */
+.uyap-log {
+  max-height: 200px;
+  overflow-y: auto;
+  background: #1f2937;
+  color: #f3f4f6;
+  padding: 12px;
+  border-radius: 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.uyap-log-entry {
+  margin-bottom: 4px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.uyap-log-success {
+  color: #4ade80;
+}
+
+.uyap-log-error {
+  color: #f87171;
+}
+
+.uyap-log-warning {
+  color: #fbbf24;
+}
+
+.uyap-log-info {
+  color: #60a5fa;
+}
+
+/* Scrollbar Styling */
+.uyap-file-list::-webkit-scrollbar,
+.uyap-log::-webkit-scrollbar,
+.uyap-panel-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.uyap-file-list::-webkit-scrollbar-track,
+.uyap-log::-webkit-scrollbar-track,
+.uyap-panel-body::-webkit-scrollbar-track {
+  background: #f3f4f6;
+  border-radius: 4px;
+}
+
+.uyap-file-list::-webkit-scrollbar-thumb,
+.uyap-log::-webkit-scrollbar-thumb,
+.uyap-panel-body::-webkit-scrollbar-thumb {
+  background: #9ca3af;
+  border-radius: 4px;
+}
+
+.uyap-file-list::-webkit-scrollbar-thumb:hover,
+.uyap-log::-webkit-scrollbar-thumb:hover,
+.uyap-panel-body::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #uyap-auto-downloader-panel {
+    width: 95vw;
+    max-height: 90vh;
+  }
+
+  .uyap-actions {
+    flex-direction: column;
+  }
+
+  .uyap-btn {
+    width: 100%;
+  }
+
+  .uyap-download-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .uyap-download-section label {
+    justify-content: center;
+  }
+}
