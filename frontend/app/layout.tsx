@@ -1,11 +1,34 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
+import NextDynamic from 'next/dynamic'
+
+// SSR devre dışı - sadece client-side render
+const PWAInstaller = NextDynamic(() => import('@/components/PWAInstaller'), { ssr: false })
 
 const inter = Inter({ subsets: ['latin'] })
 
+// Force dynamic rendering - static generation'ı kapat
+export const dynamic = 'force-dynamic'
+export const dynamicParams = true
+
 export const metadata = {
-  title: 'Avukat Yönetim Sistemi',
-  description: 'Süre takip ve görev yönetimi sistemi',
+  title: 'Avukat Asistan',
+  description: 'Süre takip, duruşma yönetimi ve avukatlık işleri asistanı',
+  manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'Avukat Asistan',
+  },
+  formatDetection: {
+    telephone: false,
+  },
+}
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
 }
 
 export default function RootLayout({
@@ -16,6 +39,7 @@ export default function RootLayout({
   return (
     <html lang="tr">
       <body className={inter.className}>
+        <PWAInstaller />
         <main className="min-h-screen p-4 md:p-6">
           {children}
         </main>

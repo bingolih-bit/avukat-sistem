@@ -1,5 +1,54 @@
-import { addDays, addWeeks, addMonths, isWeekend, format, differenceInDays, parseISO } from 'date-fns'
-import { tr } from 'date-fns/locale'
+// TÜM date-fns fonksiyonları native olarak yazıldı (TypeScript import sorununu çözmek için)
+
+// Native fonksiyonlar
+function addDays(date: Date, days: number): Date {
+  const result = new Date(date)
+  result.setDate(result.getDate() + days)
+  return result
+}
+
+function addWeeks(date: Date, weeks: number): Date {
+  return addDays(date, weeks * 7)
+}
+
+function addMonths(date: Date, months: number): Date {
+  const result = new Date(date)
+  result.setMonth(result.getMonth() + months)
+  return result
+}
+
+function differenceInDays(dateLeft: Date, dateRight: Date): number {
+  const diffTime = dateLeft.getTime() - dateRight.getTime()
+  return Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+}
+
+function parseISO(dateString: string): Date {
+  return new Date(dateString)
+}
+
+function isWeekend(date: Date): boolean {
+  const day = date.getDay()
+  return day === 0 || day === 6 // 0 = Pazar, 6 = Cumartesi
+}
+
+function formatDateNative(date: Date, formatStr: string): string {
+  if (formatStr === 'yyyy-MM-dd') {
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const day = String(date.getDate()).padStart(2, '0')
+    return `${year}-${month}-${day}`
+  }
+  // Türkçe tarih formatı için
+  if (formatStr === 'dd MMMM yyyy') {
+    const aylar = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
+                   'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık']
+    const gun = String(date.getDate()).padStart(2, '0')
+    const ay = aylar[date.getMonth()]
+    const yil = date.getFullYear()
+    return `${gun} ${ay} ${yil}`
+  }
+  return date.toISOString()
+}
 
 // Türkiye resmi tatilleri 2024-2025
 const RESMI_TATILLER_2024_2025 = [
@@ -22,7 +71,7 @@ const RESMI_TATILLER_2024_2025 = [
 ]
 
 export function isResmiTatil(date: Date): boolean {
-  const dateStr = format(date, 'yyyy-MM-dd')
+  const dateStr = formatDateNative(date, 'yyyy-MM-dd')
   return RESMI_TATILLER_2024_2025.includes(dateStr)
 }
 
@@ -82,7 +131,7 @@ export function hesaplaAciliyet(kalanGun: number): 'acil' | 'yakin' | 'guvenli' 
 // Tarih formatla (Türkçe)
 export function formatTarih(date: string | Date, formatStr: string = 'dd MMMM yyyy'): string {
   const targetDate = typeof date === 'string' ? parseISO(date) : date
-  return format(targetDate, formatStr, { locale: tr })
+  return formatDateNative(targetDate, formatStr)
 }
 
 // Süre türüne göre otomatik hesaplama
